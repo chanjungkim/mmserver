@@ -124,7 +124,7 @@ ul {
 /* Font */
 
 .messages {
-  font-size: 150%;
+  font-size: 100%;
 }
 
 .inputMessage {
@@ -132,7 +132,7 @@ ul {
 }
 
 .log {
-  color: gray;
+  color: red;
   font-size: 70%;
   margin: 5px;
   text-align: center;

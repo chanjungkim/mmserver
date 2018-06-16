@@ -15,8 +15,8 @@ $(function() {
 
   var $loginPage = $('.login.page'); // The login page
   var $chatPage = $('.chat.page'); // The chatroom page
-  var $joinGame = $('.joinGame'); 
-  var $leaveGame = $('.leaveGame'); 
+  var $joinGame = $('.joinGame');
+  var $leaveGame = $('.leaveGame');
 
   // Prompt for setting a username
   var username;
@@ -30,9 +30,9 @@ $(function() {
   function addParticipantsMessage (data) {
     var message = '';
     if (data.numUsers === 1) {
-      message += "Crickets...It's Just YOU and ME -Robot";
+      message += "현재 아무도 없습니다. 잠시만 기다려주세요.";
     } else {
-      message += "there are " + data.numUsers + " players in the Lobby";
+      message += "현재 접속자 수: " + data.numUsers + "명";
     }
     log(message);
   }
@@ -50,7 +50,7 @@ $(function() {
 
       // Tell the server your username
       socket.emit('add user', username);
-      
+
     }
   }
 
@@ -250,7 +250,7 @@ $(function() {
   socket.on('login', function (data) {
     connected = true;
     // Display the welcome message
-    var message = "Welcome to the Game Server ";
+    var message = "순천대학교 단톡에 오신 걸 환영합니다.\n매너채팅 부탁드립니다.";
     log(message, {
       prepend: true
     });
@@ -298,18 +298,18 @@ $(function() {
     log(data.username + ' created Game: ' + data.gameId);
     //alert("Game Created! ID is: "+ JSON.stringify(data));
   });
-  
+
   socket.on('disconnect', function () {
    log('you have been disconnected');
  });
-  
+
   socket.on('reconnect', function () {
    log('you have been reconnected');
    if (username) {
      socket.emit('add user', username);
    }
  });
-  
+
   socket.on('reconnect_error', function () {
    log('attempt to reconnect has failed');
  });
@@ -343,7 +343,7 @@ socket.on('notInGame', function () {
   log('You are not currently in a Game.');
 });
 
-socket.on('gameDestroyed', function (data) { 
+socket.on('gameDestroyed', function (data) {
   log( data.gameOwner+ ' destroyed game: ' + data.gameId);
 
 });
